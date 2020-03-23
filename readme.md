@@ -13,18 +13,19 @@
 * 在JavaScript里，任何函数都可以添加到对象上作为对象的属性。  
 * 当继承的函数被调用时，this指向的是当前继承的函数，而不是继承的函数所在的原型对象  
 
-## 面向对象的三大特性： 继承 多态 封装
+## 面向对象的三大特性
+* 继承 多态 封装
 
 ## 闭包的理解
 * 链式作用域结构，子对象会一级一级地向上寻找所有父对象的变量。  
   所以，父对象的所有变量，对子对象都是可见的，反之则不成立。
-* 优缺点
-  > 优点：可以避免全局变量的污染
-  > 缺点：常驻内存，增加内存使用量，使用不当容易造成内存泄露。
-* 特性
-  > 函数嵌套函数
-  > 在函数内部可以引用外部的参数和变量
-  > 参数和变量不会以垃圾回收机制回收
+* 优缺点  
+> 优点：可以避免全局变量的污染  
+> 缺点：常驻内存，增加内存使用量，使用不当容易造成内存泄露。  
+* 特性  
+> 函数嵌套函数  
+> 在函数内部可以引用外部的参数和变量  
+> 参数和变量不会以垃圾回收机制回收  
 
 ## Vue 通信
 * props
@@ -58,6 +59,44 @@
 ## typeof null === 'object'
 * 在js最初的实现中，js中的值是由一个表示类型的标签和实际数据值表示的，对象（object）的类型标签是0。  
   由于null代表空指针（大多数平台下的值为0x00），因此，null的类型标签是0。
+* JavaScript 在底层存储变量的时候，会在变量的机器码的低位 1-3位存储其类型信息
+1. 000 对象
+2. 010 浮点数
+3. 100 字符串
+4. 110 布尔
+5. 1 整数
+* 最好使用 typeof 判断基本数据类型，避免对 null 的判断
+* 对变量比较准确的判断 使用 Object.prototype.toString.call()
+
+## instanceof
+* https://juejin.im/post/5b0b9b9051882515773ae714
+```
+function new_instance_of(leftVaule, rightVaule) { 
+    let rightProto = rightVaule.prototype; // 取右表达式的 prototype 值
+    leftVaule = leftVaule.__proto__; // 取左表达式的__proto__值
+    while (true) {
+    	if (leftVaule === null) {
+            return false;	
+        }
+        if (leftVaule === rightProto) {
+            return true;	
+        } 
+        leftVaule = leftVaule.__proto__ 
+    }
+}
+```
+* 实现原理 只要右边变量的 prototype 在左边变量的原型链上即可。
+```
+function foo() {
+
+}
+Object instanceof Object // true
+Function instanceof Function // true
+Function instanceof Object // true
+foo instanceof foo // false
+foo instanceof Object // true
+foo instanceof Function // true
+```
 
 ## Javascript 严格模式
 * 消除 JavaScript 语法的一些不合理、不严谨之处
@@ -83,3 +122,62 @@
 * setInterval(function() {}, time) 循环执行
 
 ## IIFE 立即调用函数表达式
+
+### HTML5 存储
+* sessionStorage: 大小上限为5Mb(不同浏览器会有差异)，页面关闭时清空。
+* localStorage: 大小上限为5Mb(不同浏览器会有差异)，页面关闭时不会清空。
+* cookie 是服务器写入浏览器的一小段信息，只有同源的网页才能共享。  
+  如果两个网页的一级域名相同，只是次级域名不同，浏览器允许通过设置 document.domain 共享 cookie
+* 对于完全不同源的网站，两种方法解决跨域窗口通信问题
+1. 片段识别符（URL的 '#' 后面的部分）
+```html
+<!-- 父窗口 -->
+var message = originURL + '#' + data
+document.getElementIdById('myIframe').src = message
+<!-- 子窗口 -->
+window.onhashchange = checkMessage
+function checkMessage() {
+  var message = window.location.hash
+}
+```
+2. 跨文档通信api
+```
+window.postMessage()
+var open = window.open('url', 'title')
+open.postMessage('hello world', 'url')
+
+window.addEventListener('message', function(e) {
+  console.log(e.data)
+  console.log(e.source)
+  console.log(e.origin)
+})
+event.source：发送消息的窗口
+event.origin: 消息发向的网址
+event.data: 消息内容
+```
+
+## JavaScript 重定向到另一个页面
+* window.location.href = url
+* window.location.replace(url)
+
+## splice() slice() 区别
+* slice(start, end) 从 start 到 end(不包含) 截取  
+  不改变原数组，返回选定的元素
+* splice(start, length, params)  
+  start 开始元素 
+  length 截取长度
+  params 替换元素
+  返回截取的元素，改变原数组
+
+## null和undefined、undeclared的区别是什么
+* 当声明的变量还未初始化时，变量的默认值为undefined ,
+  null 用来表示尚未存在的对象，常用来表示函数企图返回一个不存在的对象。
+* undefined 表示“缺少值”， 即此处应该有一个值，但是还没有定义，典型用法是如下。
+    如果变量声明了，但没有赋值，它就等于undefined 。
+    当调用函数时，如果没有提供应该提供的参数，该参数就等于undefined 。
+    如果对象没有赋值，该属性的值为undefined 。
+    当函数没有返回值时， 默认返回undefined 。
+  null 表示“ 没有对象” ， 即此处不应该有值，典型用法是如下。
+    作为函数的参数， 表示该函数的参数不是对象。
+    作为对象原型链的终点。
+* undeclared js语法错误，没有声明直接使用，js无法找到对应的上下文

@@ -287,3 +287,120 @@ new new Foo().getName() // 3
 //   return this.name;
 // }
 // var Wscat = new User('Wscats'); //实例化
+
+
+// 冒泡排序
+console.log('冒泡排序---')
+
+function bubbingSort(arr) {
+  let { length } = arr
+  for (let i = 0; i < length - 1; i++)
+   for (let j = 0; j < length - 1 - i; j++) {
+    if (arr[j] > arr[j + 1]) {
+      let tmp = arr[j + 1]
+      arr[j + 1] = arr[j]
+      arr[j] = tmp
+    }
+   }
+  return arr
+}
+
+console.log(bubbingSort([3, 1, 2]))
+console.log(bubbingSort([1, 2, 3]))
+
+console.log('sort 排序---')
+
+let arr0 = [9, 5, 4, 6, 7, 1, 3, 2]
+arr0.sort(function(a, b) {
+  return a - b
+})
+console.log(arr0, 'sort')
+
+// instanceof
+console.log('instanceof---')
+
+function foo0() {
+
+}
+
+console.log(Object instanceof Object, 'Object instanceof Object')
+console.log(Function instanceof Function, 'Function instanceof Function')
+console.log(Function instanceof Object, 'Function instanceof Object')
+console.log(foo0 instanceof Object, 'foo0 instanceof Object')
+console.log(foo0 instanceof foo0, 'foo0 instanceof foo0')
+
+// 翻转字符串方法
+console.log('翻转字符串---')
+let ss = '123'
+console.log(ss)
+let s1 = ss.split('')
+s1.reverse()
+console.log(s1.join(''))
+
+// splice() slice()
+console.log('splice() slice()')
+let spliceArr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+// splice() 除第一 第二 参数 其余的参数会插入 start 位置
+let retSplice = spliceArr.splice(1, 2, 'a', 'b', 'c')
+console.log(retSplice, spliceArr, 'splice')
+
+let sliceArr = ['a', 'b', 'c', 'd', 'e', 'f']
+let retSlice = sliceArr.slice(1, 2)
+console.log(retSlice, sliceArr, 'slice')
+
+// reduce()
+console.log('reduce---')
+/**
+ * array.reduce(callback, initValue)
+ * callback 回调函数
+ * 参数 (total, value, index, array)
+ * total 累计器完成计算的返回值
+ * value 当前元素
+ * index 当前元素的索引
+ * array 当前元素所属的数组对象
+ * 
+ * initValue 初始值 可选
+ 
+ */
+
+function reduceAdd(...vals) {
+  return vals.reduce((t, v) => t + v)
+}
+console.log(reduceAdd(1, 2, 3, 4, 5), 'add')
+
+const scores = [
+  { score: 1, subject: "math", weight: 1 },
+  { score: 1, subject: "chinese", weight: 0.5 },
+  { score: 1, subject: "english", weight: 0.2 }
+]
+const result = scores.reduce((t, v) => t + v.score * v.weight, 0)
+console.log(result)
+
+let psA1 = [1, 2, 3]
+let psA2 = [4, 2, 3]
+let psA3 = [4, 5, 3]
+function arrFlat(...params) {
+  let newArr = Array.prototype.slice.apply(arguments)
+  // let newArr = Array.prototype.slice.apply(params)
+  console.log(newArr, 'Object.prototype.slice.apply()')
+
+  // 数组扁平化
+  newArr = newArr.reduce((x, y) => x.concat(y))
+  console.log(newArr, '数组扁平化')
+
+  // 数组去重
+  // console.log(new Set(newArr, 'new Set()'))
+  newArr = newArr.reduce((t, v) => t.includes(v) ? t : [...t, v], [])
+  console.log(newArr, '数组去重')
+}
+
+arrFlat(psA1, psA2, psA3)
+
+// filter 去重
+function filterSet(filterArr) {
+  let retFilters = filterArr.filter(function(ele, index, arr) {
+    return index === arr.indexOf(ele)
+  })
+  return retFilters
+}
+console.log(filterSet([1, 2, 3, 4, 1, 2, 3, 4]), 'filter 去重')
