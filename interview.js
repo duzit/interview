@@ -404,3 +404,49 @@ function filterSet(filterArr) {
   return retFilters
 }
 console.log(filterSet([1, 2, 3, 4, 1, 2, 3, 4]), 'filter 去重')
+
+// Math
+console.log('Math()---')
+
+let mathArr = [1, 2, 3, 4]
+console.log(Math.max(...mathArr), 'Math.max()')
+console.log(Math.min(...mathArr), 'Math.min()')
+// 返回 x 的 y 次幂
+console.log(Math.pow(2, 3), 'Math.pow(2, 3)')
+// 返回 0 到 1 之间的伪随机数 [0,1)
+console.log(Math.random(), 'Math.random()')
+// 返回四舍五入后的整数
+console.log(Math.round(1.5), 'Math.round(1.5)')
+console.log(Math.round(1.4), 'Math.round(1.4)')
+console.log(Math.round(0.4), 'Math.round(0.4)')
+console.log(Math.round(0.5), 'Math.round(0.5)')
+// 返回小于或等于一个给定数字的最大整数
+console.log(Math.floor(2), 'Math.floor(2)')
+console.log(Math.floor(1.9), 'Math.floor(1.9)')
+console.log(Math.floor(0.9), 'Math.floor(0.9)')
+
+// 匿名函数
+let noNameFunc = function(a, b) {
+  return a + b
+}
+console.log(noNameFunc(2, 3), '匿名函数')
+
+// encodeURI()  encodeURIComponent()
+let encodeURL = 'http://www.baidu.com'
+console.log(encodeURI(encodeURL), 'encodeURI')
+console.log(encodeURIComponent(encodeURL), 'encodeURIComponent')
+
+// substr() substring()
+/**
+ * substr(start, length)
+ * start 开始索引
+ * length 截取字符串长度
+ */
+/**
+ * substring(start, end)
+ * start 开始索引
+ * end 结束索引
+ */
+let substrStr = 'abcdefg'
+console.log(substrStr.substr(1, 3), 'substr()')
+console.log(substrStr.substring(1, 3), 'substring()')

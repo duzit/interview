@@ -181,3 +181,34 @@ event.data: 消息内容
     作为函数的参数， 表示该函数的参数不是对象。
     作为对象原型链的终点。
 * undeclared js语法错误，没有声明直接使用，js无法找到对应的上下文
+
+## 深拷贝与浅拷贝的区别
+* 深拷贝递归复制原数据的值或属性，浅拷贝只是复制引用
+* 深拷贝，修改新数据不会影响原数据   
+  浅拷贝，修改新数据会影响原数据  
+
+## 宿主对象 原生对象 内置对象
+* 宿主对象  
+  ECMAScript官方未定义的对象都属于宿主对象，因为其未定义的对象大多数是自己通过ECMAScript程序创建的对象，BOM，DOM等。
+* 内置对象  
+  在引擎初始化阶段被创建好的对象，是原生对象的子集
+* 原生对象  
+  Object、Function、Array、String、Boolean、Number、Date等  
+  ECMA-262 定义的类（引用类型）  
+
+## 如何将 JS 日期转换为ISO标准
+```
+let date = new Date()
+let isoDate = date.toISOString()
+"2020-03-24T03:10:30.530Z"
+```
+
+## encodeURI() encodeURIComponent() 
+* 统一资源标识符
+* encodeURI 操作的是完整的 URI，假定 URI 中的任何保留字符都有特殊意义，所有不会编码它们。
+* encodeURIComponent 操作的是组成 URI 的个别组件，假定任何保留字符都代表普通文本，  
+  所以必须编码它们，所以它们（保留字符）出现在一个完整 URI 的组件里面时不会被解释成保留字符了。
+
+## substr() substring()
+* substr(start, length)
+* substring(start, end)
