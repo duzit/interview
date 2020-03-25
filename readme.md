@@ -212,3 +212,15 @@ let isoDate = date.toISOString()
 ## substr() substring()
 * substr(start, length)
 * substring(start, end)
+
+## require.context()
+* 创建自己的模块上下文
+* require.context(dir, useSubdirectories = false, regExp = /^\.\/)  
+  dir 要搜索的文件夹目录  
+  useSubdirectories 是否搜索子集目录  
+  regExp 匹配文件的正则
+
+## head body 引入js 区别
+* head 页面加载前被加载
+* body 页面加载后被加载
+* html 加载时自上而下的，谁在前先加载谁
