@@ -6,6 +6,157 @@
   <title>interview</title>
 </head>
 <body>
+  <div class="name1">
+    <span>div span1</span>
+    <span>div span2</span>
+    <p>div p</p>
+  </div>
+  <a class="alink" href="https://cn.bing.com">bing.com</a>
+  <div class="name2">
+    <span>abc</span>
+    <span>bcd</span>
+    <span>cde</span>
+  </div>
+  <div class="name3">
+    <p>我是谁</p>
+    <p>你是谁</p>
+    <div>quququuququququuq</div>
+  </div>
+  <div class="name4">
+    margin: 0 auto;
+  </div>
+  <div class="name5">
+    <div class="flex">flex</div>
+  </div>
+  <ul id="css3">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <p>插队测试</p>
+    <!-- <p>插队测试</p> -->
+    <li>5</li>
+    <li>6</li>
+  </ul>
+  <div class="sanjiao"></div>
+  <div class="zfxing"></div>
+  <div class="zfxing1"></div>
   <script src="./interview.js"></script>
 </body>
 </html>
+<style>
+/* 后代选择器 */
+div span {
+  color: red;
+  font-size: 20px;
+}
+
+/* 相邻兄弟选择器 有相同父元素 */
+span + p {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+/* 相邻后代子元素选择器 */
+div > p {
+  color: #f6f6f6;
+}
+
+a.alink:link {
+  color: #67C23A;
+}
+a.alink:visited {
+  color: #E6A23C;
+}
+a.alink:hover {
+  color: #F56C6C;
+}
+a.alink:active {
+  color: #909399;
+}
+
+.name2 > span:first-child {
+  color: black;
+  text-transform: uppercase;
+}
+.name2 > span:last-child {
+  font-weight: bold;
+  color: black;
+}
+
+/* first-letter 作用块级元素 */
+.name3 p:first-letter {
+  color: #67C23A;
+}
+.name3 div:first-line {
+  font-variant: small-caps;
+}
+
+.name4 {
+  width: 200px;
+  height: 100px;
+  margin: 0 auto;
+  background-color: pink;
+}
+
+.name5 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.name5 .flex {
+  width: 200px;
+  height: 100px;
+  background-color: rebeccapurple;
+}
+
+/**
+  n = 3 第三个元素
+  -n + 3 前三个元素
+  odd 奇数
+  even 偶数
+*/
+/* #css3 li:nth-child(2n) {
+  background-color: salmon;
+} */
+
+/**
+  n = 1  最后一个元素
+  -n + 3 后面三个元素
+*/
+/* #css3 li:nth-last-child(2) {
+  background-color: salmon;
+} */
+
+/* 最后一个元素 */
+#css3 li:last-child {
+  background-color: salmon;
+}
+
+#css3 p:only-of-type {
+  color: #67C23A;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.sanjiao {
+  width: 0;
+  height: 0;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent transparent green;
+}
+
+.zfxing {
+  width: 10%;
+  height: 10vw;
+  background: lawngreen;
+}
+.zfxing1 {
+  width: 20%;
+  height: 0;
+  padding-top: 20%;
+  background: lightseagreen;
+}
+</style>
