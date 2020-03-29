@@ -38,13 +38,13 @@
 
 ## Vuex
 ### Vuex 和单纯的全局对象有以下两点不同
-* Vuex 的状态储存是响应式的。若store中的状态发生改变，那么相应的组件也会得到相应的高效更新。
+* Vuex 的状态储存是响应式的。若store中的状态发生改变，那么相应的组件也会得到高效更新。
 * 不能直接改变store的状态。改变store中的状态唯一途径是显示的提交（commit）mutation。  
   因为想要更明确地追踪状态的变化
 
 ### 在 Vue 组件中获得 Vuex 状态
-* Vuex 通过在根实例中注册 store 选项，提供一种机制将状态从根组件注入到每一个子组件中（需调用Vue.use(Vuex)）。  
-  子组件能通过 this.$store 访问到。
+* Vuex 通过在根实例中注册 store 选项，提供一种机制将状态从根组件注入到每一个子组件中  
+ （需调用Vue.use(Vuex) ）。 子组件能通过 this.$store 访问到。
 ### Mutation 必须是同步函数
 * 任何在回调函数中进行的状态的改变都是不可追踪的
 
@@ -53,8 +53,8 @@
 * Action 可以包含任意异步操作
 
 ### Module
-* 由于使用单一状态树，应用的所有状态会集中到一个比较大的对象。当应用变得非常复杂时，就有可能变得相当臃肿。  
-  未解决以上问题，Vuex允许将store分割成模块（Module）。
+* 由于使用单一状态树，应用的所有状态会集中到一个比较大的对象。当应用变得非常复杂时，  
+  就有可能变得相当臃肿。 为解决以上问题，Vuex允许将store分割成模块（Module）。
 
 ## typeof null === 'object'
 * 在js最初的实现中，js中的值是由一个表示类型的标签和实际数据值表示的，对象（object）的类型标签是0。  
@@ -76,10 +76,10 @@ function new_instance_of(leftVaule, rightVaule) {
     leftVaule = leftVaule.__proto__; // 取左表达式的__proto__值
     while (true) {
     	if (leftVaule === null) {
-            return false;	
+          return false;	
         }
         if (leftVaule === rightProto) {
-            return true;	
+          return true;	
         } 
         leftVaule = leftVaule.__proto__ 
     }

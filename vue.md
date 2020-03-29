@@ -39,3 +39,40 @@
 * 在同时使用过渡和css动画的时候 可以设置type属性来制定vue内部机制监听transitioned  
   或者animationed事件来完成过渡还是动画的监听
 * 过渡模式  in-out  out-in
+
+### Vue 路由模式
+* hash 在浏览器中的符号"#"，以及#后面的字符，window.location.hash 获取
+* history pushState() replaceState() 可以对浏览器的历史记录栈进行修改，  
+  前端的URL 必须跟向后端发送请求的URL 一致，否则会404
+
+### 前端性能优化方法
+* 减少需要传输的文件大小，压缩文件
+* 编码时减少不必要的样式代码
+* 减少不必要的请求
+* 浏览器缓存技术
+* html引入的js文件，放在标签后面加载
+* 页面懒加载 
+
+### Vue 首页白屏问题解决
+* 路由懒加载
+* vue-cli 使用插件（compression-webpack-plugin）开启gzip压缩，后台配合gzip访问
+* 进行cdn加速
+* 开启vue服务渲染模式 安装prerender-spa-plugin插件 在webpack中配置
+* 在生产环境中删除不必要的 console.log
+* nginx gzip 压缩 
+* 增加 loading 
+
+### v-model
+* v-bind 
+* v-on 绑定 input 事件
+
+### computed  watch
+* computed 不在data中定义，响应式变化，描述的是一个值依赖另一个值  
+  methods 调用才有效
+* watch 监听 data 中定义的值，允许异步操作
+
+### $nextTick
+
+### router  route
+* router 示例对象 push go
+* route 当前的路由信息 path query params
