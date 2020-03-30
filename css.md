@@ -80,3 +80,34 @@ line-height: 1.5rem;
 height: 3rem;
 ```
 
+### 常见页面布局方式
+* 流式布局（百分比布局）
+* 弹性布局（flex）
+* 浮动布局（float）
+* 定位布局（position）
+
+### display: none 和 visibility: hidden
+* display: none  元素不会在页面上渲染  
+  触发reflow，整个页面重排，可能打乱原来页面的规划  
+  无法响应任何事件  
+  无法获取焦点  
+  父元素为none，子元素也无法显示
+* visibility 不触发布局的情况下隐藏元素  
+  父级元素设为hidden，子集设为visible有效  
+  无法获得焦点
+  能响应事件
+  不会触发reflow，不会改变元素布局相关的属性
+  css的counter不会忽略
+
+### z-index
+* 如果不考虑 CSS3，只有定位元素(position:relative/absolute/fixed)的 z-index 才有作用
+* 顺序 从小到大  
+  层叠上下文 backgroud border   
+  负z-index   
+  block 块状水平盒子  
+  float 浮动盒子  
+  inline inline-block 水平盒子
+  z-index auto 或者 z-index 0  
+  正z-index  
+
+

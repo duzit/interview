@@ -44,18 +44,18 @@ let o1 = {
   }
 }
 // 当调用 o.m 时，this 指向了 o.
-console.log(o1.m(), 'o1.m()')
+console.log(o1.m(), 'o1.m()') // 3
 
 // p0 是继承自 o1 的对象
 let p0 = Object.create(o1)
 
-console.log(p0.m(), 'p0.m() 未赋值 a')
+console.log(p0.m(), 'p0.m() 未赋值 a') // 3
 // 创建 p 的自身属性 'a'
 p0.a = 3
 // 调用 p.m 时，'this' 指向了 p
 // 又因为 p 继承了 o 的 m 函数
 // 所以，此时的 'this.a' 即 p.a，就是 p 的自身属性 'a'
-console.log(p0.m(), 'p0.m() 已赋值 a')
+console.log(p0.m(), 'p0.m() 已赋值 a') // 4
 
 console.log('闭包---')
 
@@ -80,6 +80,14 @@ var rest = f1()
 rest() // 999 
 nAdd()
 rest() // 1000
+
+function mathPow() {
+  return function (x) {
+    return x * x
+  }
+}
+let mathPowF1 = mathPow()
+console.log(mathPowF1(3), 'mathPow')
 
 var name0 = 'xiaoMing'
 var obj = {
@@ -450,3 +458,19 @@ console.log(encodeURIComponent(encodeURL), 'encodeURIComponent')
 let substrStr = 'abcdefg'
 console.log(substrStr.substr(1, 3), 'substr()')
 console.log(substrStr.substring(1, 3), 'substring()')
+
+// JS 数据类型转换
+console.log('JS 数据类型转换---')
+
+Number(true) // 1
+Number(false) // 0
+Number('11') // 11
+Number('0x11') // 17
+Number('12qq') // NaN
+
+parseInt(111) // 111
+parseInt('') // NaN
+parseInt('1a') // 1
+parseInt('a1') // NaN
+parseInt([]) // NaN
+

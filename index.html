@@ -41,6 +41,18 @@
   <div class="sanjiao"></div>
   <div class="zfxing"></div>
   <div class="zfxing1"></div>
+  <div class="parent">
+    i am parent
+    <div class="children">
+      i am children
+    </div>
+  </div>
+  <div class="indexA">
+    <div class="indexA_child"></div>
+  </div>
+  <div class="indexB">
+
+  </div>
   <script src="./interview.js"></script>
 </body>
 </html>
@@ -158,5 +170,38 @@ a.alink:active {
   height: 0;
   padding-top: 20%;
   background: lightseagreen;
+}
+
+.parent {
+  visibility: hidden;
+  border: 1px solid black;
+}
+.parent:hover {
+  visibility: visible;
+}
+.children {
+  visibility: visible;
+}
+
+.indexA {
+  width: 120px;
+  height: 100px;
+  background-color: black;
+  z-index: 101;
+  position: relative;
+}
+.indexA .indexA_child {
+  width: 50px;
+  height: 100px;
+  background-color: blueviolet;
+  z-index: 200px;
+}
+.indexB {
+  width: 100px;
+  height: 100px;
+  background-color: palegreen;
+  margin-top: -30px;
+  z-index: 100;
+  position: relative;
 }
 </style>

@@ -1,7 +1,7 @@
 
 ## 原型链
 * JavaScript只有一种结构：对象。  
-  每个实例对象都有一个私有属性（__proto__）指向它的的构造函数的原型对象（prototype），  
+  每个实例对象都有一个私有属性（__proto__）指向它的构造函数的原型对象（prototype），  
   该原型对象也有一个自己的原型对象（__proto__），层层向上直到一个对象的原型对象为null，  
   根据定义，null是没有原型的，并作为这个原型链中的最后一个环节。  
   几乎所有JavaScript中的对象都是位于原型链顶端的Object实例。
@@ -224,3 +224,27 @@ let isoDate = date.toISOString()
 * head 页面加载前被加载
 * body 页面加载后被加载
 * html 加载时自上而下的，谁在前先加载谁
+
+## JS 数据类型转换
+* 强制类型转换
+  Number()  parseInt()  parseFloat()  toString()  String()  Boolean()
+* 隐式类型转换
+  逻辑运算符（&& || !） 运算符（+ -） 关系操作符（> = <= ==）
+
+## 跨域 同源策略
+* 协议 域名 端口号 相同
+* 同源策略限制了从同一个源加载的文档或脚本如何与来自另一个源的资源进行交互，  
+  用于隔离潜在恶意文件
+* 跨域方法  
+  jsonp  get请求  
+  cors  
+  nginx 反向代理  
+  websocket  
+  postMessage  
+
+## canvas 
+* <canvas id="myCanvas" width="200" height="100"></canvas>
+* Canvas 坐标 ctx.fillRect(0,0,150,75)
+* Canvas - 路径  ctx.moveTo(0,0); ctx.lineTo(200,100);  
+  arc(x,y,r,start,stop) 圆形
+* Canvas - 文本 ctx.font="30px Arial"; ctx.fillText("Hello World",10,50);
