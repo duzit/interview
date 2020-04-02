@@ -25,12 +25,15 @@
 * 伪类一般匹配的是元素的一些特殊状态，如 hover，link。  
   伪元素一般匹配特殊的位置，如 before，after。
 
-### css 可以继承的属性
+### css 继承的属性
+#### 可继承
 * font 系列
 * text 文本系列
 * list 列表属性
 * cursor 光标属性
 * visibility 元素可见性
+#### 不可继承
+* width height border padding margin 
 
 ### css3 新特性（伪类）
 * ele:nth-child(n)  
@@ -110,4 +113,30 @@ height: 3rem;
   z-index auto 或者 z-index 0  
   正z-index  
 
+### dispaly
+* block
+* none
+* inline-block 像行内元素一样显示 但其内容像块类型元素一样显示
+* list-item 
 
+### float
+* 具有BFC模型特性  
+  当给元素添加float 属性后，元素便会具有 BFC 模型的效果，内联元素也可以设置宽高。
+* 当给元素添加绝对定位 absolute 或者 fixed 后，元素的浮动效果就会消失，float 失效
+* 破坏父元素高度，当父元素没有设置高度，也不是 BFC 模型时，如果给子元素添加浮动效果，  
+  那么便会造成父元素高度的坍塌。  
+  1. 将父元素也设为 BFC 即可。
+  2. 添加 .clearfix 的类 
+```
+.clearfix {
+  zoom: 1;
+}
+.clearfix::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+```
+* 浮动元素不会超过父元素的内边距 padding
+* 两个相邻的浮动元素，当第一个浮动元素的宽度为100%时，第二个浮动元素会被挤到下面，  
+  通过添加负的 margin-left 或者 margin-right 值（绝对值最少等于它自身的宽度），可以使它回到第一行。

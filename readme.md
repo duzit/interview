@@ -242,9 +242,4 @@ let isoDate = date.toISOString()
   websocket  
   postMessage  
 
-## canvas 
-* <canvas id="myCanvas" width="200" height="100"></canvas>
-* Canvas 坐标 ctx.fillRect(0,0,150,75)
-* Canvas - 路径  ctx.moveTo(0,0); ctx.lineTo(200,100);  
-  arc(x,y,r,start,stop) 圆形
-* Canvas - 文本 ctx.font="30px Arial"; ctx.fillText("Hello World",10,50);
+

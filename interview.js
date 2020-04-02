@@ -368,7 +368,6 @@ console.log('reduce---')
  * array 当前元素所属的数组对象
  * 
  * initValue 初始值 可选
- 
  */
 
 function reduceAdd(...vals) {
