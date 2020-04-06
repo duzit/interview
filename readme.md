@@ -242,4 +242,22 @@ let isoDate = date.toISOString()
   websocket  
   postMessage  
 
+## 箭头函数和普通函数的区别
+* 箭头函数作为匿名函数，不能作为构造函数，不能使用 new
+* 箭头函数不能绑定 arguments ，使用 ...
+* 箭头函数会捕捉上下文的 this 值，作为自己的 this
+* 箭头函数当方法使用时没有定义this绑定
+* 箭头函数没有原型属性
+* 箭头函数不能换行
 
+## 改变 this 指向
+* 使用 es6 箭头函数
+* 在函数内部使用 _this = this
+* 使用 apply call bind
+* new 实例化一个对象
+
+## apply call bind
+* apply(thisArgs, [argsArray])  b.apply(a,[1,2]) 
+* call(this.Args[, arg1[, arg2[, ...]]])  b.call(a,1,2) 
+* bind()方法创建一个新的函数, 当被调用时，将其this关键字设置为提供的值，  
+  在调用新函数时，在任何提供之前提供一个给定的参数序列。b.bind(a,1,2)()

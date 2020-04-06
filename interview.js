@@ -473,3 +473,39 @@ parseInt('1a') // 1
 parseInt('a1') // NaN
 parseInt([]) // NaN
 
+/**
+ * 箭头函数 和 普通函数
+ */
+
+// 箭头函数没有原型属性
+let jiantouA = () => {
+  console.log(1)
+}
+function funB() {
+  console.log(2)
+}
+console.log(jiantouA.prototype, 'jiantouA.prototype')
+console.log(funB.prototype, 'funB.prototype')
+
+// this 永远指向最后调用它的那个对象
+// var thisName = 'windowName'
+// function thisFun() {
+//   var thisName = 'interName'
+//   // 使用let 和 var 定义有区别 
+//   // let 定义这里是undefined var定义是 windowName
+//   console.log(this.thisName, 'thisName') // windowName thisName
+//   console.log(`inter:${this}`) // inter:[object Window]
+// }
+// thisFun()
+// console.log(`out:${this}`) // out:[object Window]
+
+var thisName = 'windowName'
+var a = {
+  thisName: 'interName',
+  fn: function() {
+    console.log(this.thisName, 'thisName')
+  }
+}
+a.fn() // interName thisName
+
+
