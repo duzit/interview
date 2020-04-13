@@ -89,6 +89,16 @@ function mathPow() {
 let mathPowF1 = mathPow()
 console.log(mathPowF1(3), 'mathPow')
 
+function mul(x) {
+  return function(y) {
+    return function(z) {
+      return x * y * z
+    }
+  }
+}
+
+console.log(mul(1)(2)(3), 'mul')
+
 var name0 = 'xiaoMing'
 var obj = {
   name0: 'xiaoZhang',
@@ -484,7 +494,7 @@ let jiantouA = () => {
 function funB() {
   console.log(2)
 }
-console.log(jiantouA.prototype, 'jiantouA.prototype')
+console.log(jiantouA.prototype, 'jiantouA.prototype') // undefined
 console.log(funB.prototype, 'funB.prototype')
 
 // this 永远指向最后调用它的那个对象
@@ -509,3 +519,60 @@ var a = {
 a.fn() // interName thisName
 
 
+/**
+ * flat([depth]) 扁平化数组 
+ * depth 表示拉平的层级 默认为1
+ * depth = Infinity 不管有多少层嵌套，都要转成一维数组
+ */
+let flatArr0 = [1, 2, [3, 4]]
+console.log(flatArr0.flat(), 'flat') // [1, 2, 3, 4] 
+let flatArr1 = [1, 2, [3, 4, [5, 6]]]
+console.log(flatArr1.flat(), 'flat') // [1, 2, 3, 4, [5, 6]] 
+console.log(flatArr1.flat(2), 'flat') // [1, 2, 3, 4, 5, 6]
+console.log(flatArr1.flat(Infinity), 'flat') // [1, 2, 3, 4, 5, 6]
+
+/**
+ * for...in
+ * for...of 不能遍历对象
+ */
+let forInArr = [1, 2, 3, 4]
+let forInObj = {
+  name: 'du',
+  age: 29
+}
+for (const key in forInArr) {
+  console.log(key, 'forin-arr')
+}
+for (const key in forInObj) {
+  console.log(key, 'forin-obj')
+  console.log(forInObj[key], 'forin-obj')
+}
+
+let forOfString = 'abc'
+let forOfMap = [["a", 1], ["b", 2], ["c", 3]]
+for (const iterator of forOfString) {
+  console.log(iterator, 'forof-str')
+}
+for (const [key, value] of forOfMap) {
+  console.log(`${key}:${value}`, 'forof-map')
+}
+for (const value of forOfMap) {
+  console.log(value, 'forof-map')
+}
+
+// Object.assign()
+console.log('Object.assign()---------')
+let assignObj = {
+  name: {
+    name: '10'
+  },
+  age: 10
+}
+let retAssignObj = Object.assign({}, assignObj)
+retAssignObj.age = 12
+retAssignObj.name.name = 'lee'
+
+console.log(assignObj, 'before assign')  // { name : { name: 'lee'}, age: 10}
+console.log(retAssignObj, 'after assign') // { name : { name: 'lee'}, age: 12}
+// retAssignObj.age 的修改不会影响 assignObj.age
+// retAssignObj.name.name 的修改会影响 assignObj.name.name

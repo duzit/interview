@@ -26,6 +26,12 @@
 > 函数嵌套函数  
 > 在函数内部可以引用外部的参数和变量  
 > 参数和变量不会以垃圾回收机制回收  
+* 作用 
+> 可以读取函数内部的变量  
+> 让这些变量的值始终保持在内存中，不会在调用后被自动清除  
+* 用途  
+> 采用函数引用方式的setTimeout调用，原生的setTimeout有一个缺陷，你传递的第一个函数不能带参数   
+> 封装相关的功能集   
 
 ## Vue 通信
 * props
@@ -261,3 +267,219 @@ let isoDate = date.toISOString()
 * call(this.Args[, arg1[, arg2[, ...]]])  b.call(a,1,2) 
 * bind()方法创建一个新的函数, 当被调用时，将其this关键字设置为提供的值，  
   在调用新函数时，在任何提供之前提供一个给定的参数序列。b.bind(a,1,2)()
+
+## JavaScript 三类错误
+* 加载时错误，如语法错误
+* 运行时错误 滥用html语言中的命令导致的错误
+* 逻辑错误 
+
+## JavaScript 的作用域链 和 作用
+* 变量取值会先在当前作用域中查找，如果没有查到会向上查找上级作用域，直到查到全局作用域，这样一个查到过程形成的链  
+  叫做作用域链
+* 主要用于解析变量的值，如果没有这个，在不同作用域定义许多变量，JavaScript 很难为变量选择值
+
+## 匿名函数
+```
+(function(x, y) {
+  console.log(x + y)
+})(2, 3)
+```
+
+## 宿主对象 和 原生对象
+* 宿主对象 运行环境提供的对象，在不同的运行环境是不同的。 window DOM
+* 原生对象 js内置对象，全局对象，不收运行环境影响。Object String function 
+
+## 事件冒泡和事件捕获
+* 事件捕获 事件首先由最外层的元素捕获，然后传播到最内层元素  
+  假设单击事件发生在li元素中，在这种情况下，捕获事件将首先处理div，然后处理ul，最后命中目标元素li
+```
+<div>
+  <ul>
+    <li>
+    </li>
+  </ul>
+</div>
+```
+* 事件冒泡 事件由最内部元素处理，然后传播到外部元素  
+  假设click事件确实发生在冒泡模型中的li元素中，该事件将首先由li处理，然后由ul处理，最后由div元素处理。
+
+## 节流 防抖
+* 防抖 当持续触发事件时，一定时间段内没有再触发事件，事件处理函数才会执行一次，  
+  如果设定的时间到来之前，又一次触发了事件，就重新开始延时
+```
+function debounce(fn, wait) {
+  var timeout = null;
+  return function() {
+    if(timeout !== null) clearTimeout(timeout);
+    timeout = setTimeout(fn, wait);
+  }
+}
+// 处理函数
+function handle() {
+  console.log(Math.random()); 
+}
+// 滚动事件
+window.addEventListener('scroll', debounce(handle, 1000));
+```
+* 节流 当持续触发事件时，保证一定时间段内只调用一次事件处理函数
+```
+时间戳
+var throttle = function(func, delay) {
+  var prev = Date.now();
+  return function() {
+    var context = this;
+    var args = arguments;
+    var now = Date.now();
+    if (now - prev >= delay) {
+      func.apply(context, args);
+      prev = Date.now();
+    }
+  }
+}
+function handle() {
+  console.log(Math.random());
+}
+window.addEventListener('scroll', throttle(handle, 1000));
+
+定时器
+var throttle = function(func, delay) {
+  var timer = null;
+  return function() {
+    var context = this;
+    var args = arguments;
+    if (!timer) {
+        timer = setTimeout(function() {
+          func.apply(context, args);
+          timer = null;
+        }, delay);
+    }
+  }
+}
+function handle() {
+  console.log(Math.random());
+}
+window.addEventListener('scroll', throttle(handle, 1000));
+```
+* 函数节流不管事件触发有多频繁，都会保证在规定时间内一定会执行一次真正的事件处理函数，  
+  而函数防抖只是在最后一次事件后才触发一次函数。 比如在页面的无限加载场景下，  
+  我们需要用户在滚动页面时，每隔一段时间发一次 Ajax 请求，而不是在用户停下滚动页面操作时才去请求数据。  
+  这样的场景，就适合用节流技术来实现。
+
+### POST 和 GET 的区别
+* get 请求能缓存，post 不能
+* post 相对安全一点，因为 get 请求都包含在 URL 里，且会被浏览器保存历史纪录
+* Post 可以通过 request body 来传输比 Get 更多的数据，Get 没有这个技术
+* Post 支持更多的编码类型且不对数据类型限制
+
+### delete Vue.delete 的区别
+```
+let a = [1, 2, 3, 4]
+let b = [1, 2, 3, 4]
+delete a[1]
+console.log(a, 'delete') // [1, empty, 3, 4]
+this.$delete(b, 1) 
+console.log(b, 'Vue.delete') // [1, 3, 4]
+```
+
+### 响应式布局 兼容不同分辨率
+* Meta标签定义  
+```
+使用 viewport meta 标签在手机浏览器上控制布局
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+通过快捷方式打开时全屏显示
+<meta name="apple-mobile-web-app-capable" content="yes" />
+隐藏状态栏
+<meta name="apple-mobile-web-app-status-bar-style" content="blank" />
+iPhone会将看起来像电话号码的数字添加电话连接，应当关闭
+<meta name="format-detection" content="telephone=no" />
+```
+* 使用Media Queries适配对应样式
+```
+设备类型(media type):
+all所有设备；
+screen 电脑显示器；
+print打印用纸或打印预览视图；
+handheld便携设备；
+tv电视机类型的设备；
+speech语意和音频盒成器；
+braille盲人用点字法触觉回馈设备；
+embossed盲文打印机；
+projection各种投影设备；
+tty使用固定密度字母栅格的媒介，比如电传打字机和终端。
+
+设备特性(media feature):
+width浏览器宽度；
+height浏览器高度；
+device-width设备屏幕分辨率的宽度值；
+device-height设备屏幕分辨率的高度值；
+orientation浏览器窗口的方向纵向还是横向，当窗口的高度值大于等于宽度时该特性值为portrait，否则为landscape；
+aspect-ratio比例值，浏览器的纵横比；
+device-aspect-ratio比例值，屏幕的纵横比。
+/* for 240 px width screen */
+　　@media only screen and (max-device-width:240px){
+　　 selector{ ... }
+　　}
+　　/* for 320px width screen */
+　　@media only screen and (min-device-width:241px) and (max-device-width:320px){
+　　 selector{ ... }
+　　}
+　　/* for 480 px width screen */
+　　@media only screen (min-device-width:321px)and (max-device-width:480px){
+　　selector{ ... }
+　　}
+```
+
+### JavaScript 柯里化函数
+[链接](https://www.jianshu.com/p/2975c25e4d71)
+* 只传递给函数一部分参数来调用它，让它返回一个函数去处理剩下的参数
+```
+// 普通的add函数
+function add(x, y) {
+  return x + y
+}
+
+// Currying后
+function curryingAdd(x) {
+  return function (y) {
+    return x + y
+  }
+}
+
+add(1, 2)           // 3
+curryingAdd(1)(2)   // 3
+```
+* 柯里化作用
+> 参数复用  
+> 提前确认  
+> 延迟执行  
+
+* 经典面试题
+```
+function add() {
+    // 第一次执行时，定义一个数组专门用来存储所有的参数
+    var _args = Array.prototype.slice.call(arguments);
+
+    // 在内部声明一个函数，利用闭包的特性保存_args并收集所有的参数值
+    var _adder = function() {
+        _args.push(...arguments);
+        return _adder;
+    };
+
+    // 利用toString隐式转换的特性，当最后执行时隐式转换，并计算最终的值返回
+    _adder.toString = function () {
+        return _args.reduce(function (a, b) {
+            return a + b;
+        });
+    }
+    return _adder;
+}
+
+add(1)(2)(3)                // 6
+add(1, 2, 3)(4)             // 10
+add(1)(2)(3)(4)(5)          // 15
+add(2, 6)(1)   
+```
+
+### Object.assign() 是深拷贝吗？
+* 可以把 n 个源对象拷贝到目标对象中去
+* 第一级属性深拷贝，以后级别属性浅拷贝 

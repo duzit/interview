@@ -144,3 +144,156 @@ height: 3rem;
 ### css 权重选择器
 * 权重等级   
   ！important > 内联样式 style > id 选择器 > 类 class、伪类、属性选择器 > 标签选择器、伪元素 > 
+
+### normalize vs reset
+* normalize 保留了有价值的默认值，不用再为公共的元素设置样式。reset 强行给所有元素设置默认样式。
+* normalize 修复了常见的浏览器bug，例如 html5 元素的显示设置，font-size 问题等
+* normalize 是模块化的，有详细的文档
+
+### css 框架的优缺点
+* **优点**  
+  1. 加速开发 CSS框架提供通用的代码，许多丰富的UI组件样式  
+  2. 兼容性较好 CSS框架解决了各个浏览器下的兼容性问题
+  3. 合理的布局 CSS框架建立了基于网格的预定义宽度多列布局
+  4. 保持页面风格的一致性 
+* **缺点**   
+  1. 限制自由 CSS框架中的网格，选择器和其它样式，限制了我们可以设计的东西: 如布局，网格宽度，UI样式
+  2. 添加额外代码覆盖框架样式
+  3. 强迫使用框架规则 比如命名规范
+
+### 水平 垂直 居中
+#### 水平居中
+* margin 满足3个条件
+1. 元素定宽  
+2. 元素为块级元素或行内元素设置display:block  
+3. 元素的margin-left和margin-right都必须设置为auto  
+`margin: 0 auto;`
+
+* 定位法
+1. 元素定宽
+2. 元素绝对定位，并设置left:50%
+3. 元素负左边距margin-left为宽度的一半
+```
+demo1
+.md-warp{
+  position: relative;
+}
+.md-main{
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+}
+
+demo2
+.md-warp{
+    position: relative;
+}
+// 注意此时md-main不设置width为100px
+.md-main{
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%,0);
+  -ms-transform: translate(-50%,0);
+  -o-transform: translate(-50%,0);
+  transform: translate(-50%,0);
+}
+```
+* 文字水平居中  
+  对于单行文字来说，直接使用text-align: center即可。  
+  多行文字可以看作一个块级元素参考margin法和定位法。  
+
+#### 垂直居中
+[链接](https://juejin.im/post/5854e137128fe100698e6271)
+* 定位法
+```
+.md-warp{
+    position: relative;
+}
+.md-main{
+    position: absolute;
+    /* 核心 */
+    top: 50%;
+    margin-top: -50px;
+}
+
+.md-warp{
+  position: relative;
+}
+.md-main{
+  position: absolute;
+  /* 核心 */
+  top: calc(50% - 50px);
+}
+
+.md-warp{
+  position: relative;
+}
+.md-main{
+  position: absolute;
+  top: 50%;
+  // 注意此时md-main不设置height为100px
+  -webkit-transform: translate(0,-50%);
+  -ms-transform: translate(0,-50%);
+  -o-transform: translate(0,-50%);
+  transform: translate(0,-50%);
+}
+```
+* 单行文本垂直居中
+  元素内容是单行，并且其高度是固定不变的。  
+  将其line-height设置成和height的值一样
+```
+div{
+  width: 400px;
+  height: 300px;
+  border: 1px solid #000;
+}
+span{
+  line-height: 300px;
+}
+```
+* 视窗单位的解决办法
+```
+.md-warp{
+  position: relative;
+}
+.md-main{
+  position: absolute;
+  margin: 50vh auto 0;
+  transform: translateY(-50%);
+}
+```
+
+#### 水平垂直居中
+```
+.md-warp{
+  display:flex;
+}
+.md-main{
+  margin: auto;
+}
+
+.md-warp{
+  display:flex;
+}
+.md-main{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+```
+
+#### 绝对垂直居中
+```
+.md-warp{
+  position: relative;
+}
+.md-main{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+```
