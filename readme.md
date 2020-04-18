@@ -71,11 +71,12 @@
 3. 100 字符串
 4. 110 布尔
 5. 1 整数
-* 最好使用 typeof 判断基本数据类型，避免对 null 的判断
+* 最好使用 typeof 判断基本数据类型(除了 null)，避免对 null 的判断
 * 对变量比较准确的判断 使用 Object.prototype.toString.call()
 
 ## instanceof
 * https://juejin.im/post/5b0b9b9051882515773ae714
+* 通过原型链判断的，A instanceof B, 在A的原型链中层层查找，是否有原型等于B.prototype 
 ```
 function new_instance_of(leftVaule, rightVaule) { 
     let rightProto = rightVaule.prototype; // 取右表达式的 prototype 值
@@ -483,3 +484,26 @@ add(2, 6)(1)
 ### Object.assign() 是深拷贝吗？
 * 可以把 n 个源对象拷贝到目标对象中去
 * 第一级属性深拷贝，以后级别属性浅拷贝 
+
+### 你必须要懂的原生JS知识点
+[你必须要懂的原生JS知识点](https://juejin.im/post/5cb7b62b5188253772753c01)
+
+### 如何判断一个变量是不是数组
+* Array.isArray 
+* instanceof Array
+* Object.prototype.toString.call [Object Array]
+```
+function fn() {
+  console.log(Array.isArray(arguments));   //false; 因为arguments是类数组，但不是数组
+  console.log(Array.isArray([1,2,3,4]));   //true
+  console.log(arguments instanceof Array); //fasle
+  console.log([1,2,3,4] instanceof Array); //true
+  console.log(Object.prototype.toString.call(arguments)); //[object Arguments]
+  console.log(Object.prototype.toString.call([1,2,3,4])); //[object Array]
+  console.log(arguments.constructor === Array); //false
+  arguments.constructor = Array;
+  console.log(arguments.constructor === Array); //true
+  console.log(Array.isArray(arguments));        //false
+}
+fn(1,2,3,4);
+```

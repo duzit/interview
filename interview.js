@@ -555,10 +555,38 @@ for (const iterator of forOfString) {
 }
 for (const [key, value] of forOfMap) {
   console.log(`${key}:${value}`, 'forof-map')
+  // a:1 forof-map
+  // b:2 forof-map
+  // c:3 forof-map
 }
 for (const value of forOfMap) {
   console.log(value, 'forof-map')
+  // ['a', 1]
+  // ['b', 2]
+  // ['c', 3]
 }
+
+let forOfArrObj = [
+  {
+    name: 'a',
+    age: 1
+  },
+  {
+    name: 'b',
+    age: 2
+  },
+  {
+    name: 'c',
+    age: 3
+  }
+]
+for (const value of forOfArrObj) {
+  console.log(value, 'forOfArrObj')
+  // {}, {}, {}
+}
+// for (const [key, value] of forOfArrObj) {
+//   console.log(key, value, 'forOfArrObj') // TypeError: .for is not iterable
+// }
 
 // Object.assign()
 console.log('Object.assign()---------')
@@ -576,3 +604,17 @@ console.log(assignObj, 'before assign')  // { name : { name: 'lee'}, age: 10}
 console.log(retAssignObj, 'after assign') // { name : { name: 'lee'}, age: 12}
 // retAssignObj.age 的修改不会影响 assignObj.age
 // retAssignObj.name.name 的修改会影响 assignObj.name.name
+
+// 判断一个变量是不是数组
+function isArrayFunction() {
+  let tmpArr = [1, 2, 3, 4]
+  console.log(arguments, 'arguments isArray')
+  console.log(Array.isArray(arguments)) // false  arguments 是类数组
+  console.log(Array.isArray(tmpArr)) // true
+  console.log(arguments instanceof Array) // false
+  console.log(tmpArr instanceof Array) // true
+  console.log(Object.prototype.toString.call(arguments)) // [object Arguments]
+  console.log(Object.prototype.toString.call(tmpArr)) // [object Array]
+}
+isArrayFunction(1,2,3,4)
+
