@@ -145,14 +145,14 @@ console.log(typeof NaN, 'NaN') // number
 
 let bar = {}
 let arr = []
-console.log(typeof bar === 'object', 'typeof {}')
-console.log(typeof arr === 'object', 'typeof []')
-console.log(typeof null === 'object', 'typeof null')
+console.log(typeof bar === 'object', 'typeof {}') // true
+console.log(typeof arr === 'object', 'typeof []') // true
+console.log(typeof null === 'object', 'typeof null') // true
 
 console.log('Object.prototype.toString.call()')
-console.log(Object.prototype.toString.call(bar) === '[object Object]', '[object Object]')
-console.log(Object.prototype.toString.call(arr) === '[object Array]', '[object Array]')
-console.log(Object.prototype.toString.call(null) === '[object Null]', '[object Null]')
+console.log(Object.prototype.toString.call(bar) === '[object Object]', '[object Object]') // true
+console.log(Object.prototype.toString.call(arr) === '[object Array]', '[object Array]') // true
+console.log(Object.prototype.toString.call(null) === '[object Null]', '[object Null]') // true
 
 console.log('NaN---')
 console.log(isNaN(NaN), 'isNaN(NaN)')
@@ -541,17 +541,33 @@ let forInObj = {
   age: 29
 }
 for (const key in forInArr) {
-  console.log(key, 'forin-arr')
+  console.log(key, 'forin-arr') // 0 1 2 3
+  console.log(forInArr[key], 'forin-arr') // 1 2 3 4
 }
 for (const key in forInObj) {
-  console.log(key, 'forin-obj')
-  console.log(forInObj[key], 'forin-obj')
+  console.log(key, 'forin-obj') // name age
+  console.log(forInObj[key], 'forin-obj') // du 29
 }
 
 let forOfString = 'abc'
 let forOfMap = [["a", 1], ["b", 2], ["c", 3]]
 for (const iterator of forOfString) {
   console.log(iterator, 'forof-str')
+  // a
+  // b
+  // c
+}
+for (const key of forOfMap) {
+  console.log(`${key}`, 'forof-map-key')
+  // a,1 
+  // b,2 
+  // c,3 
+}
+for (const [key] of forOfMap) {
+  console.log(`${key}`, 'forof-map-key')
+  // a
+  // b
+  // c
 }
 for (const [key, value] of forOfMap) {
   console.log(`${key}:${value}`, 'forof-map')
@@ -617,4 +633,38 @@ function isArrayFunction() {
   console.log(Object.prototype.toString.call(tmpArr)) // [object Array]
 }
 isArrayFunction(1,2,3,4)
+
+// 私有变量
+function funcPrivateVal() {
+  var a = 1
+  return function() {
+    return a
+  }
+}
+
+console.log(funcPrivateVal()(), '私有变量')
+
+// 继承
+console.log('---继承---')
+
+function parent1() {
+  this.name = 'ben'
+  this.age = 10
+}
+
+parent1.prototype.say = function() {
+  console.log('say hello')
+}
+
+function child1(addr) {
+  // 通过call()方法改变child1的this指向使子类的函数体内执行父级的构造函数从而实现继承效果
+  parent1.call(this)
+  this.addr = addr || 'qu'
+}
+
+var inherit1 = new child1('hang')
+console.log(inherit1.addr, 'addr') // hang
+console.log(inherit1.name, 'name') // ben
+console.log(inherit1.age, 'age') // 10
+// console.log(inherit1.say(), 'say()') // Uncaught TypeError: inherit1.say is not a function
 
