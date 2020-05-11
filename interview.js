@@ -668,3 +668,30 @@ console.log(inherit1.name, 'name') // ben
 console.log(inherit1.age, 'age') // 10
 // console.log(inherit1.say(), 'say()') // Uncaught TypeError: inherit1.say is not a function
 
+function parent2() {
+  this.name = 'lee'
+  this.age = 10
+  this.arr = [1, 2]
+}
+
+parent2.prototype.say = function() {
+  console.log('say hello')
+}
+
+function child2() {
+  this.addr = 'hz'
+}
+
+child2.prototype = new parent2()
+var c1 = new child2()
+var c2 = new child2()
+console.log(c1.name, '原型链继承') // lee
+console.log(c2.age, '原型链继承') // 10 
+// 可以继承父类中的方法
+console.log(c1.say(), '原型链继承') // say hello
+c1.arr.push(3)
+console.log(c2.arr, '原型链继承') // [1, 2, 3]
+console.log(c1.addr, 'addr')
+c1.addr = 'nj'
+console.log(c1.addr, 'addr')
+console.log(c2.addr, 'addr')

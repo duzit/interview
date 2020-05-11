@@ -64,7 +64,33 @@ async function myFunction() {
 * [链接](https://www.jianshu.com/p/3eb7a1843009)
 * 原型链继承
 ```js
+function parent2() {
+  this.name = 'lee'
+  this.age = 10
+  this.arr = [1, 2]
+}
 
+parent2.prototype.say = function() {
+  console.log('say hello')
+}
+
+function child2() {
+  this.addr = 'hz'
+}
+
+child2.prototype = new parent2()
+var c1 = new child2()
+var c2 = new child2()
+console.log(c1.name, '原型链继承') // lee
+console.log(c2.age, '原型链继承') // 10 
+// 可以继承父类中的方法
+console.log(c1.say(), '原型链继承') // say hello
+c1.arr.push(3)
+console.log(c2.arr, '原型链继承') // [1, 2, 3]
+console.log(c1.addr, 'addr')
+c1.addr = 'nj'
+console.log(c1.addr, 'addr')
+console.log(c2.addr, 'addr')
 ```
 * 构造函数继承  
   子类构造函数向父类构造函数传参
@@ -84,9 +110,12 @@ function child1(addr) {
   this.addr = addr || 'qu'
 }
 
+// 可以传参
 var inherit1 = new child1('hang')
 console.log(inherit1.addr, 'addr')
 console.log(inherit1.name, 'name')
 console.log(inherit1.age, 'age')
+// 无法继承 say() 方法
 // console.log(inherit1.say(), 'say()') // Uncaught TypeError: inherit1.say is not a function
 ```
+
