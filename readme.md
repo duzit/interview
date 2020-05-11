@@ -507,3 +507,85 @@ function fn() {
 }
 fn(1,2,3,4);
 ```
+
+### 常见的继承方法
+* 扩展原型对象实现继承
+```js
+function Person() {
+  Person.prototype.name = 'hello'
+
+}
+let per = new Person()
+console.log(per.name) // hello
+```
+* 经典继承
+```js
+function create(o) {
+  function F(){}
+  F.prototype = o
+  return new F()
+}
+let o = {
+  name: 'ww',
+  age: 10
+}
+let o2 = create(o)
+```
+* 借助构造函数实现继承
+```js
+function f1(name, age) {
+  this.name = name
+  this.age = age
+}
+function f2(name, age) {
+  f1.call(this, name, age)
+}
+let f3 = new f2('qq', 10)
+```
+
+### setTimeout() 代替 setInterval() 
+```js
+let timer = setTimeout(function() {
+  index++ 
+  if (index > 5) {
+    clearTimeout(timer)
+  } else {
+    timer = setTimeout(arguments.callee, 1000)
+  }
+}, 1000)
+```
+
+### 一次性渲染大量数据到页面上 而不卡
+* requestAnimationFrame(callback)  
+  告诉浏览器——你希望执行一个动画，并且要求浏览器在下次重绘之前调用指定的回调函数更新动画。  
+  该方法需要传入一个回调函数作为参数，该回调函数会在浏览器下一次重绘之前执行
+```js
+setTimeout(() => {
+  // 插入十万条数据
+  const total = 100000
+  // 一次插入 20 条，如果觉得性能不好就减少
+  const once = 20
+  // 渲染数据总共需要几次
+  const loopCount = total / once
+  let countOfRender = 0
+  let ul = document.querySelector("ul");
+  function add() {
+    // 优化性能，插入不会造成回流
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < once; i++) {
+      const li = document.createElement("li");
+      li.innerText = Math.floor(Math.random() * total);
+      fragment.appendChild(li);
+    }
+    ul.appendChild(fragment);
+    countOfRender += 1;
+    loop();
+  }
+  function loop() {
+    if (countOfRender < loopCount) {
+      window.requestAnimationFrame(add);
+    }
+  }
+  loop();
+}, 0);
+```
