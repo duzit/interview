@@ -44,7 +44,16 @@
 * hash 在浏览器中的符号"#"，以及#后面的字符，window.location.hash 获取  
   但不会被包括在 HTTP 请求中，对后端完全没有影响，因此改变 hash 不会重新加载页面。
 * history pushState() replaceState() 可以对浏览器的历史记录栈进行修改，  
-  前端的URL 必须跟向后端发送请求的URL 一致，否则会404
+  前端的URL 必须跟向后端发送请求的URL 一致，否则会404  
+> 需要后台配置  
+```js
+// nginx
+location / {
+  try_files $uri $uri/ /index.html;
+}
+// node js express
+connect-history-api-fallback
+```
 
 ### 前端性能优化方法
 * 减少需要传输的文件大小，压缩文件

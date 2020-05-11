@@ -40,3 +40,53 @@ module.exports = {
 }
 ```
 
+### async/await
+* [链接](https://segmentfault.com/a/1190000007535316)
+* await 命令后面的 Promise 对象，运行结果可能是 rejected，所以最好把 await 命令放在 try...catch 代码块中。
+```js
+async function myFunction() {
+  try {
+    await somethingThatReturnsAPromise();
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// 另一种写法
+async function myFunction() {
+  await somethingThatReturnsAPromise().catch(function (err){
+    console.log(err);
+  });
+}
+```
+
+### 几种继承的方法
+* [链接](https://www.jianshu.com/p/3eb7a1843009)
+* 原型链继承
+```js
+
+```
+* 构造函数继承  
+  子类构造函数向父类构造函数传参
+```js
+function parent1() {
+  this.name = 'ben'
+  this.age = 10
+}
+
+parent1.prototype.say = function() {
+  console.log('say hello')
+}
+
+function child1(addr) {
+  // 通过call()方法改变child1的this指向使子类的函数体内执行父级的构造函数从而实现继承效果
+  parent1.call(this)
+  this.addr = addr || 'qu'
+}
+
+var inherit1 = new child1('hang')
+console.log(inherit1.addr, 'addr')
+console.log(inherit1.name, 'name')
+console.log(inherit1.age, 'age')
+// console.log(inherit1.say(), 'say()') // Uncaught TypeError: inherit1.say is not a function
+```

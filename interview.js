@@ -643,3 +643,28 @@ function funcPrivateVal() {
 }
 
 console.log(funcPrivateVal()(), '私有变量')
+
+// 继承
+console.log('---继承---')
+
+function parent1() {
+  this.name = 'ben'
+  this.age = 10
+}
+
+parent1.prototype.say = function() {
+  console.log('say hello')
+}
+
+function child1(addr) {
+  // 通过call()方法改变child1的this指向使子类的函数体内执行父级的构造函数从而实现继承效果
+  parent1.call(this)
+  this.addr = addr || 'qu'
+}
+
+var inherit1 = new child1('hang')
+console.log(inherit1.addr, 'addr') // hang
+console.log(inherit1.name, 'name') // ben
+console.log(inherit1.age, 'age') // 10
+// console.log(inherit1.say(), 'say()') // Uncaught TypeError: inherit1.say is not a function
+

@@ -7,7 +7,7 @@
 * 区别：   
   标准盒模型的 width height 只包含 content，不包含border 和 padding  
   IE盒模型的 width height 包含 content border 和 padding
-* 一般来说，可以通过修改元素的 box-sizing 属性来改变元素的盒模型
+* 一般来说，可以通过修改元素的 box-sizing 属性来改变元素的盒模型  content-box(盒式模型)  border-box(IE盒子)
 
 ### css 选择符
 * class 类选择器 .className { ... }
@@ -297,3 +297,6 @@ span{
   margin: auto;
 }
 ```
+
+### BFC 
+* Block Formatting Context 块格式化上下文
