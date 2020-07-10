@@ -119,3 +119,7 @@ console.log(inherit1.age, 'age')
 // console.log(inherit1.say(), 'say()') // Uncaught TypeError: inherit1.say is not a function
 ```
 
+### JavaScript 运行机制详解
+* http://www.ruanyifeng.com/blog/2014/10/event-loop.html
+
+
