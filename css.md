@@ -47,9 +47,11 @@
 * ele:only-of-type 父元素下只能有一个ele元素 然后选中
 
 ### position 的值 relative 和 absolute 定位原点是?
-* absolute 相对于 position 值不为 static 的第一个父元素的 paddingbox 进行定位
+* absolute 相对于 position 值不为 static 的第一个父元素的 paddingbox 进行定位  
+  并且该父元素必须设置有position属性，可以将position设置为relative
 * fixed 相对于浏览器窗口定位
 * relative 相对于元素本身的正常位置定位
+* static 默认值。没有定位，元素出现在正常的流中
 
 ### 为什么要初始化 CSS 样式？
 * 因为浏览器的兼容问题，不同浏览器对有些标签的默认值是不同的，  
