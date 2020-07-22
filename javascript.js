@@ -136,4 +136,57 @@ var object = {
     }
   }
 }
-console.log(object.getName()());
+console.log(object.getName()()); // erdong
+// 另一种写法
+var name2 = 'erdong';
+var object2 = {
+  name2: 'chen',
+  getName: function() {
+    // this 绑定为 object2，that = this 也绑定为 object2, 闭包，因此返回的函数也能访问到外层作用域中的变量that
+    var that = this
+    return function() {
+      return that.name2;
+    }
+  }
+}
+console.log(object2.getName()()); // chen
+
+console.log('--------------');
+
+(function() {
+  var a5 = b5 = 1;
+  // 等价于
+  // b5 = 1;
+  // var a5 = b;
+})()
+console.log(typeof a5 === 'undefined'); // true 
+console.log(typeof b5 === 'undefined'); // false
+
+console.log('------------');
+// js 任务队列
+var a6 = 6;
+setTimeout(() => {
+  a6 = 666;
+}, 0);
+new Promise((res, req) => {
+  console.log();
+  
+})
+console.log(a6); // 6
+
+setTimeout(() => {
+  console.log('setTimeout');
+}, 0);
+let promise =  new Promise((resovle, req) => {
+  console.log('Promise 00');
+  resovle()
+})
+promise.then(() => {
+  console.log('Promise 11');
+})
+console.log('normal');
+// 顺序
+// Promise 00
+// normal
+// Promise 11
+// setTimeout
