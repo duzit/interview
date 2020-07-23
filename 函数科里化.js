@@ -38,6 +38,10 @@ console.log(hasNumber("test123")); // true
 console.log(hasNumber("test")); // false
 console.log(hasLetter("test")); // true
 
+// 2. 延迟调用
+// let hasNumber = curryCheck(/\d+/g); // 先将函数赋给某一变量
+// hasNumber('xx'); // 需要的时候再调用
+
 // 支持多参数传递
 function progressCurrying(fn, args) {
   var _this = this;
