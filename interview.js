@@ -695,3 +695,29 @@ console.log(c1.addr, 'addr')
 c1.addr = 'nj'
 console.log(c1.addr, 'addr')
 console.log(c2.addr, 'addr')
+
+// 宏任务 --> 微任务
+// 宏任务： 主线程 setTimeout
+// 微任务： Promise()
+setTimeout(() => {
+  console.log(999999);
+}, 0);
+
+new Promise((resolve) => {
+  console.log(888888);
+  setTimeout(() => {
+    console.log('Promise setTimeout');
+  }, 0);
+  resolve(123);
+})
+  .then(res => {
+    console.log('res', res);
+    setTimeout(() => {
+      console.log('then setTimeout');
+    }, 0);
+  })
+
+setTimeout(() => {
+  console.log(777777);
+}, 0);
+// 888888  res 123  999999  Promise setTimeout  777777  then setTimeout
