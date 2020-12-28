@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>element.width.height</title>
+  <script>
+    window.onload = () => {
+      const eleContent = document.getElementById('content');
+      const eleStyle = document.getElementById('styles');
+      const eleDes = document.getElementById('des');
+
+      const tplStyle = `
+        content style: <br>
+        width: 200px;<br>
+        height: 100px;<br>
+        padding: 20px;<br>
+        margin: 0 auto;<br>
+        border: 2px solid #f2f2f2;
+      `;
+      const tplDes = `
+        offsetWidth: ${eleContent.offsetWidth}, 包含 padding + border <br>
+        offsetHeight: ${eleContent.offsetHeight}, 包含 padding + border <br>
+        offsetTop: ${eleContent.offsetTop}, border之外 到边界的距离 <br>
+        offsetLeft: ${eleContent.offsetLeft}, border之外 到边界的距离 <br>
+        clientWidth: ${eleContent.clientWidth}, 包含 padding 不包括 border <br>
+        clientHeight: ${eleContent.clientHeight}, 包含 padding 不包括 border <br>
+        clientTop: ${eleContent.clientTop}, 容器 border 的宽度<br>
+        clientLeft: ${eleContent.clientLeft}, 容器 border 的宽度<br>
+      `;
+
+      eleStyle.style.marginTop = '20px';
+      eleStyle.innerHTML = tplStyle;
+
+      eleDes.style.marginTop = '20px';
+      eleDes.innerHTML = tplDes;
+
+      const eleBody = document.getElementsByTagName('body')[0];
+      const eleClick = document.getElementById('click-event');
+      eleClick.innerHTML = '点击显示内容';
+      eleBody.addEventListener('click', (e) => {
+        eleClick.innerHTML = `
+          pageX: ${e.pageX}, 相对于整个文档的水平坐标<br>
+          pageY: ${e.pageY}, 相对于整个文档的垂直坐标
+        `;
+      })
+
+      const eleComputed = document.getElementById('computed-content');
+      eleComputed.style.width = '100%';
+      eleComputed.style.height = '50px';
+      const computedObj = window.getComputedStyle(eleComputed, null);
+      eleComputed.innerHTML = `
+      getComputedStyle:width: ${computedObj.width}, <br>
+      getComputedStyle:height: ${computedObj.height}, <br>
+      `;
+    }
+  </script>
+</head>
+<body>
+  <div id="element">
+    <div id="content">
+      content
+    </div>
+    <div id="styles"></div>
+    <div id="des"></div>
+    <hr>
+    <div id="click-event"></div>
+    <hr>
+    <h3>getComputedStyle()</h3>
+    <div id="computed-content"></div>
+  </div>
+</body>
+</html>
+
+<style>
+  #element {
+    height: 100%;
+  }
+  #content {
+    width: 200px;
+    height: 100px;
+    padding: 20px;
+    margin: 0 auto;
+    border: 2px solid #f2f2f2;
+  }
+
+</style>
