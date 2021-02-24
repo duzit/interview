@@ -1,4 +1,7 @@
 ## 面试总结 面试准备
 
-## other 
-* 待整理
+## interview/javascript 
+* javascript 相关
+
+## interview/vue 
+* vue 相关

@@ -21,3 +21,9 @@ function myFunction() {
   y = 3.14;   // 报错 (y 未定义)
 }
 ```
+
+### Javascript 严格模式
+* 消除 JavaScript 语法的一些不合理、不严谨之处
+* 消除代码运行的不安全之处，保证代码运行的安全
+* 提高编译器效率，增加运行速度
+* 为未来的 JavaScript 版本做好铺垫
