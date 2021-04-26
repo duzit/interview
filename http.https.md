@@ -1,7 +1,9 @@
-## http
+## http https
 -----
 ### 浏览器缓存机制
 * [链接](https://juejin.im/post/58eacff90ce4630058668257)
+* [参考1](https://mp.weixin.qq.com/s/7BXw5Eq6ZUu6M-Q8ghtJPQ)
+* [参考2](https://mp.weixin.qq.com/s/JYXfEd_BmGA1WWvUkegt2g)
 
 ### 一个网页从开始请求到最终显示的过程
 * 在浏览器中输入URL
