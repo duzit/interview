@@ -8,3 +8,6 @@
 ### https
 * 为了解决 http 不安全的特性
 * https = http + SSL/TLS 通过SSL证书来验证服务器身份 并为浏览器和服务器之间的通信进行加密
+
+### https 如何保证安全 
+[参考](https://mp.weixin.qq.com/s/FrY96dUyExhEVm_ECRGpSA)
