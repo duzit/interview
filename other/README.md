@@ -6,7 +6,7 @@
 
 - 常用操作数组 字符串的方法 ES6新增数组方法(find findIndex copyWithin fill includes flat)
 
-- 箭头函数 和 普通函数 区别  不应该使用箭头函数的一些情况
+- 箭头函数 和 普通函数 区别  不应该使用箭头函数的一些情况 改变 this 的方法 区别
 
 - 事件循环的理解 eventloop
 
@@ -20,18 +20,20 @@
 
 - Promise 与 async/await 区别
 
-- Promise 怎么实现链式调用  跟 返回不同的状态  then的参数是什么？
+- Promise 怎么实现链式调用  跟 返回不同的状态 then的参数是什么？
 
 - JS深拷贝的方法 递归 JSON（无法实现对象中方法的深拷贝） Object.assign(一级属性拷贝)
 
 - JS模块化 CommonJs(required) ES6(import) 
 
-- call(this, a,b,c) apply(this, [a,b,c])
+- call(this, a,b,c) apply(this, [a,b,c]) 改变this指向
 
 - 判断数组的几种方法 Array.isArray() instanceof constructor Object.prototype.toString.call()
 
 
 # Vue
+
+- Vue 实例是怎么挂载的？挂载过程发生了什么？
 
 - 联调 接口请求在哪个生命周期 axios 拦截器封装
 
@@ -54,6 +56,8 @@
 
 - nextTick 的原理以及运行机制 
 
+- Vue.component()、Vue.use()、this.$xxx()
+
 - 项目中的优化 
 
 ## Vuex 
@@ -66,7 +70,7 @@
 
 - 守卫 参数
 
-- 路由 { path: '', query: {} } { name: '', params: {} }
+- 路由 { path: '', query: {} } { name: '', params: {} }  传参方式
 
 - 路由的懒加载
 
