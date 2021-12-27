@@ -14,3 +14,9 @@
 5. @mixin. @includes 混入中可以嵌混入
 6. 防抖 节流
 7. 内存泄漏 垃圾回收机制 常见的内存泄漏情况
+
+## TODOs
+
+- umd amd commonjs 
+
+- babel 
