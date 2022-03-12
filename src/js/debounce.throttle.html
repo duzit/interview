@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    // window.addEventListener('resize', (handle))
+    window.addEventListener("resize", debounce(handle, 1000));
+
+    function handle() {
+      console.log("hello.");
+    }
+
+    function debounce(fn, delay) {
+      let timer = null;
+      return function () {
+        if (timer !== null) clearTimeout(timer);
+        timer = setTimeout(() => {
+          fn.apply();
+        }, delay);
+      };
+    }
+
+    function throttle(fn, delay) {
+      var timer = null;
+      return function () {
+        if (!timer) {
+          timer = setTimeout(() => {
+            fn.apply(this);
+            timer = null;
+          }, delay);
+        }
+      };
+    }
+
+    function handleClick() {
+      console.log(111);
+    }
+
+    //  -----
+    function fnDebounce1(fn, delay) {
+      let timer = null
+
+      return function() {
+        clearTimeout(timer)
+
+        timer = setTimeout(fn, delay);
+      }
+    }
+
+    let count = 0
+    function fnD1(e) {
+      // 如果不使用 fnDebounce1 ，this 指向的是 <div id="el1"></div>
+      // 如果使用 fnDebounce1 ， this 是 undefined 
+      console.log(this, 'this');
+      console.log(e, 'event');
+      el1.innerHTML = count++
+    }
+
+    window.onload = () => {
+
+      const el1 = document.getElementById('el1')
+      el1.onmousemove = fnD1
+      // el1.onmousemove = fnDebounce1(fnD1, 1000)
+    }
+
+
+
+  </script>
+</head>
+<body>
+  <button onclick="throttle(handleClick, 1000)">Click</button>
+
+  <div id="el1"></div>
+</body>
+</html>
+
+<style>
+  #el1 {
+    width: 200px;
+    height: 200px;
+    border: 2px solid;
+    margin-top: 20px;
+  }
+</style>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>继承</title>
+
+  <script>
+    // 构造函数继承
+    function P1() {
+      this.name = 'hello'
+      this.arr = [1,2]
+      this.fn1 = function() {
+        console.log('p1 fn')
+      }
+    }
+
+    P1.prototype.age = 12;
+
+    function C1 () {
+      this.sex = 1
+      P1.call(this)
+    }
+
+    const f1 = new C1()
+
+    console.log(f1.sex) // 1
+    console.log(f1.name) // hello
+    console.log(f1.fn1()) // p1 fn
+    // 无法继承父构造函数原型上的方法和属性
+    console.log(f1.age); // undefined 
+
+    // 可以修改父类上的属性
+    f1.name = 'kkk'
+    console.log(f1.name) // kkk
+    f1.arr.push(3)
+    console.log(f1.arr); // [1,2,3]
+    const f2 = new P1()
+    console.log(f2.name); // hello
+    console.log(f2.arr); // [1,2]
+
+    console.log( '---------');
+
+    // 原型链继承 
+    function P2() {
+      this.name = 'Momo'
+      this.arr = [1,2]
+    }
+
+    P2.prototype.say = () => {
+      console.log(' i am p2');
+    }
+
+    function C2() {
+      this.age = 12
+    }
+
+    C2.prototype = new P2()
+
+    const f3 = new C2()
+    const f4 = new C2()
+
+    console.log(f3.name);
+    // 可以获取父类原型链上的属性
+    console.log(f3.say()); // i am p2
+    console.log(f4.name);
+
+    f3.name = 'Hhhh'
+    f3.arr.push('3')
+    // f3.arr = [1,2,3]
+
+    console.log(f3.name);
+    console.log(f4.name);
+    console.log(f3.arr);
+    console.log(f4.arr);
+
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
