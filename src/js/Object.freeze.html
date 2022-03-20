@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Object.freeze</title>
+  <script>
+    const obj = {
+      name: 'Ben',
+      age: 12,
+      info: {
+        sex: 1
+      },
+      arr: [1,2]
+    }
+
+    Object.freeze(obj)
+
+    // 修改 删除 新增属性值 无效
+    obj.age = 13
+    obj.xx = 'xx'
+    delete obj.name
+    console.log(JSON.stringify(obj)); // {"name":"Ben","age":12,"info":{"sex":1}}
+
+    // 通过 Object.defineProperty() 修改 无效
+    Object.defineProperty(obj, 'age', { valeu: 14 })
+    // 通过 修改原型 TypeError
+    // Object.setPrototypeOf(obj, { age: 14 })
+
+    // 冻结数组
+    const arr = [1,2]
+
+    Object.freeze(arr)
+
+    arr[0] = 33
+    // arr.push(4) // TypeError
+    console.log(arr); // [1, 2]
+
+    // Object.freeze 只能冻结一层对象 可以修改二层
+    obj.info.sex = 2
+
+    console.log(JSON.stringify(obj)); // {"name":"Ben","age":12,"info":{"sex":2},"arr":[1,2]}
+
+    // 要使对象不可变，需要递归冻结每个类型为对象的属性（深冻结）
+    // 深冻结函数
+    function deepFreeze(obj) {
+      // 取回定义在obj上的属性名
+      var propNames = Object.getOwnPropertyNames(obj);
+
+      // 在冻结自身之前冻结属性
+      propNames.forEach(function(name) {
+        var prop = obj[name];
+
+        // 如果prop是个对象，冻结它
+        if (typeof prop == 'object' && prop !== null)
+          deepFreeze(prop);
+      });
+
+      // 冻结自身(no-op if already frozen)
+      return Object.freeze(obj);
+    }
+
+    obj2 = {
+      internal: {}
+    };
+
+    deepFreeze(obj2);
+    obj2.internal.a = 'anotherValue';
+    obj2.internal.a; // undefined
+
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

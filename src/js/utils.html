@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utils</title>
+
+  <script>
+    var _toString = Object.prototype.toString
+
+    function isRawType(v) {
+      return _toString.call(v).slice(8, -1)
+    }
+
+    console.log(isRawType([1,2])); // Array
+    console.log(isRawType('hello')); // String
+    console.log(isRawType(false)); // Boolean
+    console.log(isRawType(null)); // Null
+    console.log(isRawType({name: 'hello'})); // Object
+
+    function isPlainObject (obj) {
+      return _toString.call(obj) === '[object Object]'
+    }
+    // 区分 Array 和 Object
+    console.log(isPlainObject([])); // false
+    console.log(isPlainObject({})); // true
+
+    function isDef(v) {
+      return v !== undefined && v !== null
+    }
+
+    function isPromise (val) {
+      return (
+        isDef(val) &&
+        typeof val.then === 'function' &&
+        typeof val.catch === 'function'
+      )
+    }
+
+    console.log(isPromise('hello')); // false
+    console.log(isPromise(new Promise((resolve, reject) => {
+      resolve('success')
+    }))); // true
+    async function fn() {}
+    console.log(isPromise(fn())); // true
+
+    function makeMap (
+      str,
+      expectsLowerCase
+    ) {
+      var map = Object.create(null);
+      var list = str.split(',');
+      for (var i = 0; i < list.length; i++) {
+        map[list[i]] = true;
+      }
+      return expectsLowerCase
+        ? function (val) { return map[val.toLowerCase()]; }
+        : function (val) { return map[val]; }
+    }
+
+    const fn1 = makeMap('name,age')
+    console.log(fn1('name')); // true
+    console.log(fn1('xx')); // undefined
+
+    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    function hasOwn (obj, key) {
+      return hasOwnProperty.call(obj, key)
+    }
+
+    const obj1 = {
+      name: 'hello',
+      age: 12
+    }
+
+    Object.prototype.sex = 1
+
+    console.log(hasOwn(obj1, 'name')); // true
+    console.log(hasOwn(obj1, 'sex')); // false
+    console.log(obj1.sex); // 1
+
+    var camelizeRE = /-(\w)/g;
+    var camelize = (function (str) {
+      return str.replace(camelizeRE, function (_, c) { return c ? c.toUpperCase() : ''; })
+    });
+
+    console.log(camelize('on-click')); // onClick
+
+    var capitalize = (function (str) {
+      return str.charAt(0).toUpperCase() + str.slice(1)
+    });
+
+    console.log(capitalize('hello')); // 'Hello'
+
+    var hyphenateRE = /\B([A-Z])/g;
+    var hyphenate = (function (str) {
+      return str.replace(hyphenateRE, '-$1').toLowerCase()
+    });
+
+    console.log(hyphenate('onClick')); // on-click
+
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
